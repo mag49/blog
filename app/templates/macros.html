@@ -1,0 +1,50 @@
+{% macro displayBlog(blog_list) %}
+<div class="row">
+	{% if blog_list %}
+		{% for blog in blog_list %}
+		<div class="col-md-6">
+			<div class="thumbnail text-center">
+			<h5 class="card-header">{{blog.title}}</h5>
+			<h5 class="card-header">{{blog.blog}}</h5>
+			<div class="card-body">
+				<blockquote class="blockquote mb-0">
+					<h2>{{blog.blog_content}}</h2>
+					<footer class="blockquote-footer"> Posted by {{blog.user.username}}<a href="/blog/{{blog.id}}" class="btn btn-primary pull-right">comment</a></p></footer>
+				</blockquote>
+				
+				<!-- <a href="{{url_for('main.new_comment',pitch_id = category.id)}}" class="btn btn-info"> put a comment</a>
+				<a href="{{url_for('main.upvote',pitch_id = category.id)}}" class= "btn btn-primary btn-sm"><i></i>Upvote <span>{{category.upvotes.count()}}</span></a>
+				<a href="{{url_for('main.downvote',pitch_id = category.id)}}" class= "btn btn-danger btn-sm"><i class="far fa-thumbs-up"></i>Downvote <span>{{category.downvotes.count()}}</span></a>
+ -->
+
+			</div>
+		</div>
+
+		</div>
+		{% endfor %}
+	{% else %}
+	{% endif %}
+</div>
+{% endmacro %}
+
+{% macro displayComments(comments_list) %}
+<ul>
+
+			{% if comments %}
+			{% for comment in comments_list %}
+				<div class="row text-center">
+						<a><p style="color: blue">{{ comment.comment }}</p></a>
+						<small> posted by {{comment.user.username}}</small>
+				</div>
+			{% endfor %}
+			{% else %}
+
+			<h3>The comments do not exist in this post yet !</h3>
+			{%endif%}
+
+	</ul>
+	
+			
+
+
+{% endmacro %}
