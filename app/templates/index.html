@@ -1,30 +1,97 @@
-<div class="container-fluid welcome-page">
-    <div class="container-fluid">
-            <div class="jumbotron">
-                    <h1 class="display-4">SEAL OF STYLES</h1>
-                    <p>All about fashion style, beauty,travel and lifestyle</p>
-                    
-                  </div>
-        <div class="row">
-            <div class="col-md-12 welcome">
-                
-                <a id="start" class="btn btn-danger animated infinite flash" href="{{url_for('main.new_pitch')}}">
-                    blogs</a>
-                
-                <a id="start" class="btn btn-danger animated infinite flash" href="{{url_for('auth.login')}}">Sign
-                    In</a>
-                
-            </div>
-        </div>
+{% extends 'base.html' %} 
 
-        <!-- jQuery library -->
-        <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.4.1/jquery.min.js"></script>
+{% block styles %}
+{{ super () }}
 
-        <!-- Popper JS -->
-        <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.16.0/umd/popper.min.js"></script>
+<link rel="stylesheet" href="{{ url_for('static', filename='css/index.css')}}">
+<link href="https://fonts.googleapis.com/css?family=Playfair+Display+SC&display=swap" rel="stylesheet">
 
-        <!-- Latest compiled JavaScript -->
-        <script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.4.1/js/bootstrap.min.js"></script>
+<link href="https://fonts.googleapis.com/css?family=Aclonica&display=swap" rel="stylesheet">
+{% endblock %}
+
+
+{% block content %}
+<div class="container" style="background-image: url('https://cdn.pixabay.com/photo/2016/04/20/08/21/entrepreneur-1340649__340.jpg')">
+
+
+  <h1 class="blog" style=" text-align: center; color: white;">
+    THIS IS STYLE BLOGS
+  </h1>
+
+  <div class="container">
+    {% if current_user.is_authenticated %}
+    <a class="blog" style="font-size: 20px; color: white; padding-left: 40%;" href="{{url_for('main.new_blog')}}">WRITE YOUR BLOG</a>
+    {% else %}
+    <a href="{{url_for('auth.login')}}" class="login" style="padding-left: 40%; font-size: 20px;">log in</a></p>
+    {% endif %}
+  </div>
+
+  <div class="container">
+    <div class="phrases">
+      <div class="well well-lg">
+        <p class="q" style="text-align: center;font-size: 30px; ">PHRASE</p>
+        <p class="author" style="font-size: 20px;">{{phrase.author}}</p>
+        <p class="phrase">{{phrase.phrase}}</p>
+      </div>
+    </div>
+    </div>
+  
+<div class="container">
+  <div class="row">
+    <div class="col-md-6">
+      <a class="Lifestyle" href="/blog/lifestyle" style="font-size: 30px; text-align: center; color: white; 
+      ">LIFESTYLE BLOGS</a><br>
+      <img
+        src="https://cdn.pixabay.com/photo/2017/10/23/05/56/holiday-2880261_960_720.jpg" 
+        alt=""
+      />
+    </div>
+
+    <div class="col-md-6">
+        <a class="Travel" href="/blog/travel" style="font-size: 30px;  color: white;" >TRAVEL BLOGS</a><br>
+      <img
+        src="https://cdn.pixabay.com/photo/2014/08/12/00/01/oia-416135_960_720.jpg"
+        alt=""
+      />
+    </div>
+  </div>
+
+  <div class="row">
+    <div class="col-md-6">
+        <a class="beauty" href="/blog/beauty" style="font-size: 30px;  color: white;">BEAUTY BLOGS</a><br>
+      <img
+        src="https://cdn.pixabay.com/photo/2016/05/02/17/59/cosmetics-1367779_960_720.jpg"
+        alt=""
+      />
+    </div>
+
+    <div class="col-md-6">
+        <a class="fashion" href="/blog/fashion" style="font-size: 30px;  color: white;">FASHION BLOGS</a><br>
+      <img
+        src="https://cdn.pixabay.com/photo/2017/08/01/01/58/wall-2562773_960_720.jpg"
+        alt=""
+      /> 
+    </div>
+  </div>
+
+  <div class="row">
+    <div class="col-md-6">
+        <a class="hair" href="/blog/hair" style="font-size: 30px; white;">HAIR BLOGS</a><br>
+      <img
+        src="https://cdn.pixabay.com/photo/2016/06/29/01/51/smile-1485850_960_720.jpg " width="520" height="350"
+        alt=""
+      />
+    </div>
+  
+    <div class="col-md-6">
+        <a class="entertainment" href="/blog/entertainment" style="font-size: 30px; font-family: 'Playfair Display SC', serif; color: white;">ENTERTAINMENT BLOGS</a><br>
+      <img
+        src="https://cdn.pixabay.com/photo/2017/07/21/23/57/concert-2527495__340.jpg"
+        alt=""
+      />
+      
     </div>
 </div>
-{% endblock %}
+</div>
+
+{% endblock content %}

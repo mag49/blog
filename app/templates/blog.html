@@ -1,0 +1,30 @@
+{% extends 'base.html' %}
+
+{% block styles %}
+{{ super () }}
+<link href="https://fonts.googleapis.com/css?family=Cinzel&display=swap" rel="stylesheet">
+
+<link href="https://fonts.googleapis.com/css?family=Handlee&display=swap" rel="stylesheet">
+
+{% endblock %}
+
+{% block content %}
+<div class="container-1">
+  <div class="row">
+    <div class="col-md-4">
+      <div class="well well-lg">
+
+    {% for blog in blogs %}
+      <h2 class="title" style="font-size:50px ; font-family: 'Cinzel', serif;">{{blog.blog_title}}</h2>
+      <p class="content" >{{blog.blog_content}}</p>
+      <p class="posted" >Posted by {{blog.user.username|capitalize}}</p>
+      <a href="/blog/comment/{{blog.id}}">Check comments</a>
+      <a href="/blog/Delete/{{blog.id}}" >Delete blog</a>
+    {% endfor %} 
+  </div>
+  </div> 
+  </div>
+
+</div>
+
+{% endblock content %}
