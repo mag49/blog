@@ -1,0 +1,23 @@
+{% extends 'base.html'%}
+{% import "bootstrap/wtf.html" as wtf %}
+
+{% block styles %}
+{{ super () }}
+<link rel="stylesheet" href="{{ url_for('static', filename='css/index.css')}}">
+<link href="https://fonts.googleapis.com/css?family=Aref+Ruqaa&display=swap" rel="stylesheet">
+
+{% endblock %}
+{% block content %}
+<div class="container">
+    <div class="col-md-12">
+        <div class="start">
+        <h3 class="newblog" style="text-align: center; font-size: 30px; font-family: 'Aref Ruqaa', serif;">POST YOUR OWN BLOG</h3>
+        <hr>
+        <div class="form" style="text-align: center; font-size: 20px; width: 50%; margin-left: 300px;">
+        {{ wtf.quick_form(blog_form)}}
+    </div>
+    </div>
+    </div>
+
+</div>
+{% endblock %}
