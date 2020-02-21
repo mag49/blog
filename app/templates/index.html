@@ -11,31 +11,25 @@
 
 
 {% block content %}
-<div class="container" style="background-image: url('https://cdn.pixabay.com/photo/2018/01/11/09/39/woman-3075704_960_720.jpg')">
-
-
-  <h1 class="blog" style=" text-align: center; color: white;">
-    THIS IS STYLE BLOGS
-  </h1>
-    <P>lifestyle, fashion,Travel,Beauty</P>
-  <div class="container">
-    {% if current_user.is_authenticated %}
-    <a class="blog" style="font-size: 20px; color: white; padding-left: 40%;" href="{{url_for('main.new_blog')}}">WRITE YOUR BLOG</a>
-    {% else %}
-    <a href="{{url_for('auth.login')}}" class="login" style="padding-left: 40%; font-size: 20px;">log in</a></p>
-    {% endif %}
-  </div>
-
-  <!-- <div class="container">
-    <div class="phrases">
-      <div class="well well-lg">
-        <p class="q" style="text-align: center;font-size: 30px; ">PHRASE</p>
-        <p class="author" style="font-size: 20px;">{{phrase.author}}</p>
-        <p class="phrase">{{phrase.phrase}}</p>
-      </div>
+<div class="container">
+    <div class="row">
+        <div class="col-md-12">
+            <div class="jumbotron" style="background-color: pink;">
+                <h1 class="blog" style=" text-align: center; color: black;">
+                    THIS IS STYLE BLOGS
+                  </h1>
+                    <P style="text-align: center">Lifestyle and Travel</P>
+                  <div>
+                    {% if current_user.is_authenticated %}
+                    <a class="btn bg-primary" style="font-size: 20px; color: black; margin-top: 30px;" href="{{url_for('main.new_blog')}}">WRITE YOUR BLOG</a>
+                    {% else %}
+                    <a href="{{url_for('auth.login')}}" class="login" style="padding-left: 40%; font-size: 20px;">log in</a></p>
+                    {% endif %}
+                  </div>
+            </div>
+        </div>
     </div>
-    </div> -->
-  </div>
+</div>
 
 
-{% endblock content %}
+{% endblock %}

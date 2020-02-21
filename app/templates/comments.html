@@ -3,36 +3,25 @@
 {% import 'macros.html' as macro %}
 
 {% block content %}
-
-
-        
-        
-<div class="row">
-                <div class="card">
-                                <div class="card-body text-center">
-                                <h4><a>{{pitch.title}}</a></h4>
-                                  <h5 class="card-text text-center">{{comments}}.</h5>
-                                </div>
-                </div>
-
-
-                <div class="container">
-                                <div class="row">
-                                        <div class="jumbotron">
-                                                {{wtf.quick_form(comment_form)}}
-                                        </div>
+     
+    <div class="container">
+            <div class="row">
+                    <div>
+                        <div class="row">
+                                <div class="jumbotron">
+                                    <h3>Comments</h3>
+                                    {{wtf.quick_form(comment_form)}}
                                 </div>
                         </div>
-                        
-<hr><hr>
-        <div class="container">
+                    </div>
+        </div>                 
+            <hr><hr>
+        <div class="row">
                 <div class="col-md-12">
-                        <h4 style="color: blue; text-align: center;text-underline-position: below">Comments</h4>
-                        {{ macro.displayComments(comments) }}
-
-                </div>
-                 
+                    <h4 style="color: blue; text-align: center;text-underline-position: below">Comments</h4>
+                    {{ macro.displayComments(comments) }}
+                </div>          
         </div>
+    </div>
         
-</div>
-
+{% endblock %}

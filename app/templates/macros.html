@@ -29,8 +29,7 @@
 			{% if comments %}
 			{% for comment in comments_list %}
 				<div class="row text-center">
-						<a><p style="color: blue">{{ comment.comment }}</p></a>
-						<small> posted by {{comment.user.username}}</small>
+						<a><p style="color: blue">{{comment.comment}}</p></a>
 				</div>
 			{% endfor %}
 			{% else %}
@@ -39,8 +38,16 @@
 			{%endif%}
 
 	</ul>
-	
-			
+{% endmacro %}
 
-
+{% macro displayLifestyleBlog(blogs)%}
+    {% for blog in blogs %}
+        <div class="col-md-3">
+            <li class="list-group-item">
+                <p>{{blog.blog_title}}</p>
+                <p>{{blog.blog_content}}</p>
+                <a class="btn bg-primary" href="/blog/comment/{{blog.id}}">Comments</a>
+            </li>
+        </div>
+    {% endfor%}
 {% endmacro %}

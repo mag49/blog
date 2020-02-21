@@ -1,18 +1,29 @@
 from flask_wtf import FlaskForm
-from wtforms import StringField,TextAreaField,SubmitField,SelectField
-from wtforms.validators import Required
-from flask_login import current_user
+from wtforms import StringField,PasswordField,BooleanField,SubmitField
+from wtforms.validators import Required,Email,Length,EqualTo
+from ..models import User
+from wtforms import ValidationError
 
-class BlogForm(FlaskForm):
-    title = StringField('Blog title', validators=[Required()])
-    content = TextAreaField('Text',validators=[Required()])
-    category = SelectField('Type',choices=[('lifestyle','lifesytle blog'),('beauty','beauty blog'),('fashion', 'fashion blog'),('fashion','fashion blog'),('food','food bog'),('entertainment','entertainment blog')])
-    submit = SubmitField('Submit')
-    
-class CommentForm(FlaskForm):
-    text = TextAreaField('Leave a comment:',validators=[Required()])
-    submit = SubmitField('submit')
-    
-class UpdateProfile(FlaskForm):
-    bio = TextAreaField('tell us about you.',validators=[Required])
-    
+class LoginForm(FlaskForm):
+    email = StringField('Your Email Address',validators=[Required(),Email()])
+    password = PasswordField('Password',validators =[Required()])
+    remember = BooleanField('Remember me')
+    submit = SubmitField('Sign Up')
+
+
+class RegistrationForm(FlaskForm):
+    email = StringField('Your Email Address',validators=[Required(),Email()])
+    username = StringField('Enter your username',validators = [Required()])
+    password = PasswordField('Password',validators = [Required(),
+    EqualTo('password2',message = 'Passwords must match')])
+    password2 = PasswordField('Confirm Passwords',validators = [Required()])
+    submit = SubmitField('Sign Up')
+
+
+    def validate_email(self,data_field):
+        if User.query.filter_by(email =data_field.data).first():
+            raise ValidationError('There is an account with that email')
+
+    def validate_username(self,data_field):
+        if User.query.filter_by(username = data_field.data).first():
+            raise ValidationError('That username is taken')

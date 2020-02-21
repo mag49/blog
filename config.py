@@ -9,8 +9,9 @@ class Config:
     '''
     General configuration parent class
     '''
-    SECRET_KEY = 'maggie'
-    SQLALCHEMY_DATABASE_URI = 'postgresql+psycopg2://moringa:word@localhost/blog'
+    SECRET_KEY='maggie'
+    SQLALCHEMY_DATABASE_URI='postgresql+psycopg2://moringa:word@localhost/blog'
+    UPLOADED_PHOTOS_DEST ='app/static/photos'
 
     #  email configurations
     # MAIL_SERVER = 'smtp.googlemail.com'
@@ -29,7 +30,6 @@ class DevConfig(Config):
     '''
     Development configuration child class
     '''
-    SQLALCHEMY_DATABASE_URI = 'postgresql+psycopg2://moringa:word@localhost/blog'
     DEBUG = True
     
 config_options = {

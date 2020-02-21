@@ -31,9 +31,11 @@ def index():
     '''
     view root page function that returns index and its data 
     '''
-    phrase=get_phrase()
-    print(phrase)
-    return render_template('index.html',current_user=current_user,phrase=phrase)
+    return render_template('index.html',current_user=current_user)
+
+@main.route('/Blogs', methods=["GET", "POST"])
+def blog_page():
+    return render_template('home.html')
 
 @main.route('/blog/<category>')
 def blog(category):
@@ -60,18 +62,20 @@ def comment(id):
     posted_date = blog.posted.strftime('%b, %d, %Y')
     
     comment_form = CommentForm()
-    comments = Comment.get_comments(blog)
     if comment_form.validate_on_submit():
         comment = comment_form.text.data
-        
-        new_comment = Comment(comment=comment,username=current_user.username,blog_id = blog)
+        username = comment_form.username.data
+        new_comment = Comment(username=username, comment=comment)
         
         new_comment.save_comment()
-        return redirect(url_for("main.comment",id=id))
         
-    return render_template('comment.html',comment_form=comment_form,comments=comments)
+        return redirect(url_for("main.comment",id=id))
 
-@main.route('/user/<uname>/blogs')
+    comments = Comment.query.filter_by(username=comment_form.username.data).all()
+        
+    return render_template('comments.html',comment_form=comment_form,comments=comments)
+
+@main.route('/user/<uname>/blogs', methods=["GET", "POST"])
 def user_blogs(uname):
     user = User.query.filter_by(username=uname).first()
     blogs = Blog.query.filter_by(user_id = user.id).all()
@@ -97,3 +101,13 @@ def new_blog():
     title = 'new blog'
     return render_template('new_blog.html',title=title,blog_form=blog_form)
           
+
+@main.route('/blog/lifestyle', methods=["GET", "POST"])
+def lifestyle():
+    blogs = Blog.query.filter_by(category='lifestyle').all()
+    return render_template('lifestyle.html', blogs=blogs)
+
+@main.route('/blog/travel_blogs', methods=["GET", "POST"])
+def travel():
+    blogs = Blog.query.filter_by(category='travelblogs').all()
+    return render_template('travel.html', blogs=blogs)

@@ -4,10 +4,6 @@ from flask_login import UserMixin
 from . import login_manager
 from datetime import datetime
 
-@login_manager.user_loader
-def load_user(user_id):
-    return User.query.get(int(user_id))
-
 
 class User(UserMixin,db.Model):
     __tablename__ = 'users'
@@ -36,14 +32,11 @@ class User(UserMixin,db.Model):
     
     def __repr__(self):
         return f'User {self.username}'
+
+    @login_manager.user_loader
+    def load_user(user_id):
+        return User.query.get(int(user_id))
     
-class Phrase:
-    '''
-    class that defines instance of phrase 
-    '''
-    def __init__(self,author,quote):
-        self.author=author
-        self.phrase=phrase
         
 class Blog(db.Model):
     __tablename__='blogs'
@@ -53,9 +46,9 @@ class Blog(db.Model):
     blog_content = db.Column(db.String(1000))
     category = db.Column(db.String)
     posted = db.Column(db.DateTime,default=datetime.utcnow)
-    user_id = db.Column(db.Integer,db.ForeignKey("users.id"))
     user_name=db.Column(db.String(255))
     
+    user_id = db.Column(db.Integer,db.ForeignKey("users.id"))
     comments = db.relationship('Comment' , backref= 'blog_id', lazy='dynamic')
     
     def save_blog(self):
@@ -64,14 +57,12 @@ class Blog(db.Model):
         
     @classmethod
     def get_blogs(cls,category):
-        blogs=Blog.query.filter_by(category=category).all()
-        
+        blogs=Blog.query.filter_by(category=category).all() 
         return blogs  
     
     @classmethod
     def get_blog(cls,id):
-        blog = Blog.query.filter_by(id=id).first()
-        
+        blog = Blog.query.filter_by(id=id).first() 
         return blog
     
 class Comment(db.Model):
@@ -88,6 +79,6 @@ class Comment(db.Model):
         
     @classmethod
     def get_comments(cls,blog_id):
-        comments = Comment.query.filter_by(blog_id=blog_id).all()
+        comments = Comment.query.filter_by(id=blog_id).all()
         return comments
     
