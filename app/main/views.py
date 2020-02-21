@@ -3,7 +3,6 @@ from . import main
 from flask_login import login_required,current_user
 from app import db
 from app.main import main
-from ..request import get_quotes
 from .forms import CommentForm,BlogForm,UpdateProfile
 from ..models import User,Blog,Comment
 import datetime
