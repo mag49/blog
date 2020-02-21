@@ -39,7 +39,7 @@ class User(UserMixin,db.Model):
     
         
 class Blog(db.Model):
-    __tablename__='blogs'
+    __tablename__ = 'blogs'
     
     id = db.Column(db.Integer,primary_key = True)
     blog_title = db.Column(db.String)
@@ -65,7 +65,7 @@ class Blog(db.Model):
         return blog
     
 class Comment(db.Model):
-    __tablename__='comments'
+    __tablename__ = 'comments'
         
     id = db.Column(db.Integer,primary_key = True)
     comment = db.Column(db.String(1000))
